@@ -1,7 +1,8 @@
 """
 title: Sub Agent
 author: skyzi000
-version: 0.5.7
+minor fix: imranzunzani
+version: 0.5.8
 license: MIT
 required_open_webui_version: 0.7.0
 description: Run autonomous, tool-heavy tasks in a sub-agent and keep the main chat context clean.
@@ -530,8 +531,6 @@ async def run_sub_agent_loop(
     return "Sub-agent reached maximum iterations without providing a final response."
 
 
-
-
 async def load_sub_agent_tools(
     request: Request,
     user: Any,
@@ -808,9 +807,12 @@ RESPONSE REQUIREMENTS:
         It has the same tools and executes them in a loop until completion,
         returning only the final result to keep the main conversation clean.
 
-        :param description: Brief task summary shown to the user as status text, and it should be written in the user's language.
-        :param prompt: Detailed instructions for the sub-agent; this can be written in any language that best suits the task.
-        :return: Sub-agent's final response after task completion
+        Args:
+            description: Brief task summary shown to the user as status text, and it should be written in the user's language.
+            prompt: Detailed instructions for the sub-agent; this can be written in any language that best suits the task.
+
+        Returns:
+            Sub-agent's final response after task completion
         """
         if __request__ is None:
             return json.dumps(
@@ -1004,9 +1006,12 @@ RESPONSE REQUIREMENTS:
             {"description": "Analyze data B", "prompt": "You are a data analyst. ..."}
         ]
 
-        :param tasks: List of task objects using the SubAgentTaskItem schema.
-        :return: JSON with "results" array in the same order as tasks.
-                 Each element has "description" and either "result" or "error".
+        Args:
+            tasks: List of task objects using the SubAgentTaskItem schema.
+
+        Returns:
+            JSON with "results" array in the same order as tasks.
+            Each element has "description" and either "result" or "error".
         """
         if __request__ is None:
             return json.dumps(
